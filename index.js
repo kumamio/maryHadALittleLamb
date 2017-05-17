@@ -11,18 +11,44 @@
 	}
 
 	Yard.prototype.drawLamb = function(){
-        ctx.fillStyle = '#fff';
-        ctx.fillRect(0, 0, 50*(this.point.x+1), 50*(this.point.y+1));
+		return function(){
+        	ctx.fillStyle = '#fff';
+        	ctx.fillRect(50*(this.point.x), 50*(this.point.y), 50*(this.point.x+1), 50*(this.point.y+1));
+        }
 	}
 
 	Yard.prototype.init = function(){
         ctx.moveTo(0,0);
         ctx.beginPath();
+        ctx.fillStyle = '#fff';
+        ctx.fillRect(0, 0, 50 * (this.point.x+1), 50*(this.point.y+1));
+      	this.addEventKeyboard();
 		this.drawLamb();
       	ctx.closePath();
 	}
 	Yard.prototype.addEventKeyboard = function(){
-
+		var _this = this;
+		window.addEventListener( "keydown", function(e) {
+			debugger;
+			switch (e.keyCode) {
+				case 39 : 
+					if ( _this.point.x <=9 ) {
+						_this.point.x = _this.point.x + 1 ; 
+					}else {
+						_this.point.x = 9;
+					}
+					break;
+				case 37 : 
+					if ( _this.point.x > 0 ) {
+						_this.point.x = _this.point.x - 1 ; 
+					}else {
+						_this.point.x = 0;
+					}
+					break;
+			}
+			ctx.clearRect(0,0,500,500);
+			_this.drawLamb();
+		})
 	}
 
 	var yard = new Yard();
