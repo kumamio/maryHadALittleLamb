@@ -74,8 +74,6 @@
 				}
 				ctx.clearRect(0,0,500,500);
 				this.drawFresh();
-				// debugger;
-				console.log(this.eaten.join(" "))
 			})
 		}
 		addEventMouse () {
